@@ -1,0 +1,43 @@
+# --- Universal Multiplicity Constant (Λm) ---
+Lambda_m = 1.61803398875  # Example: Golden ratio as placeholder
+
+# --- Dynamic Recursive Operator Ξ(t) ---
+def Xi(t, tensor_field):
+    """
+    Dynamic recursive operator Ξ(t) acting on tensor_field
+    :param t: time or recursion step
+    :param tensor_field: input tensor (numpy array)
+    :return: updated tensor field
+    """
+    # Example recursive update: harmonic modulation with Λm
+    return Lambda_m * np.sin(t) * tensor_field + np.cos(t) * tensor_field
+
+# --- Prime-Indexed Tensor Initialization ---
+def prime_indexed_tensor(n_primes, dimension=3):
+    """
+    Initialize a tensor field with prime indices as weights
+    :param n_primes: number of prime indices
+    :param dimension: tensor dimensionality
+    :return: numpy array tensor with prime weights
+    """
+    primes = list(primerange(2, 2 + n_primes * 10))[:n_primes]
+    tensor = np.zeros((n_primes, dimension, dimension))
+    for i, p in enumerate(primes):
+        tensor[i] = np.identity(dimension) * p
+    return tensor
+
+# --- Example Q-Module Execution ---
+if __name__ == "__main__":
+    # Initialize tensor field with first 5 primes
+    T = prime_indexed_tensor(5)
+
+    print("Initial Prime-Indexed Tensor Field:")
+    print(T)
+
+    # Apply Ξ(t) operator at time t=0.5
+    t = 0.5
+    T_updated = Xi(t, T)
+
+    print("\nUpdated Tensor Field after applying Ξ(t):")
+    print(T_updated)
+</code></pre>
